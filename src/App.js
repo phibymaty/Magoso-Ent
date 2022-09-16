@@ -1,10 +1,10 @@
-import Nav from './components/nav/Nav';
+import Home from "./pages/Home";
 import './App.css';
 function App() {
   return (
    <div>
   
-<Nav/>
+<Home/>
 
 
    </div>
