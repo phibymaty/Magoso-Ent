@@ -54,7 +54,7 @@ gap:4em;
 
 const NavList = styled.li``;
 
-function Nav() {
+const Nav=() =>{
   return (
     <NavContainer>
       <Container>
@@ -68,9 +68,12 @@ function Nav() {
           </Left>
           <Right>
             <NavUl>
-              <NavList>Shop</NavList>
-              <NavList>About</NavList>
-              <NavList>Login/register</NavList>
+            <NavList> <li><a href="./Home.js">Home</a></li></NavList>
+              <NavList> <li><a href="Shop.js">Shop</a></li></NavList>
+              <NavList><li><a href="./About.js">About</a></li></NavList>
+              <NavList> <li><a href="Login/register.js">login/register</a></li></NavList>
+              <NavList> <li><a href="Contact.js">Contact</a></li></NavList>
+             <NavList><li><i class="fa-solid fa-cart-shopping"></i></li></NavList>
               
               <NavList>
             <Badge badgeContent={0} color="secondary">
