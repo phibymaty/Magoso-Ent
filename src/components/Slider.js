@@ -1,6 +1,6 @@
 import { slides } from "../data";
 import styled from "styled-components";
-import { style } from "@mui/system";
+
 
 const SlideContainer =styled.div``
 const SliderItem=styled.div`

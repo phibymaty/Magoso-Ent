@@ -1,4 +1,4 @@
-import ContactItem from "./ContactItem";
+// import ContactItem from "./ContactItem";
 import styled from "styled-components";
 const Contact = () => {
   const ContactContainer = styled.div`
@@ -11,6 +11,7 @@ const Contact = () => {
       <inpute type="text" placeholder="Email" />
       <inpute type="text" placeholder="password" />
       <inpute type="text" placeholder="re-enter" />
+      
     </ContactContainer>
   );
 };

@@ -4,7 +4,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-const NavContainer = styled.nav``;
+const NavContainer = styled.nav`
+
+`;
 
 const Container = styled.div`
   width: 80%;
@@ -50,6 +52,7 @@ const NavUl = styled.ul`
 list-style-type:none;
 display:flex;
 gap:4em;
+color:white;
 `;
 
 const NavList = styled.li``;
