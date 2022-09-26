@@ -45,10 +45,9 @@ const SelectOption = styled.option``;
 const SelectDropDown = styled.select`
   padding: 1em;
 `;
-const AddProductImage=styled.img``;
+const AddProductImage = styled.img``;
 
 const AddProduct = () => {
-  
   const [formData, setFormData] = useState({
     productName: "",
     productDescription: "",
@@ -57,31 +56,49 @@ const AddProduct = () => {
     productImage: "",
     galleryImages: [],
   });
-  const [img ,setImg] = useState(" ")
+  const [img, setImg] = useState(" ");
 
-  const images = (e) => {
-    const file = e.target.files[0];
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
-      console.log(fileReader.result);
-      setImg(fileReader.result)
-    };
-    fileReader.onerror = (error) => {
-      console.log(error);
-    };
-    const images=(e,type)=>{
+  const images = (e, type) => {
+    // const file = e.target.files[0];
+    // const fileReader = new FileReader();
+    // fileReader.readAsDataURL(file);
 
-    }
-    const base64=file=>{
-    return new Promise((resolve, reject) => {
-      const fileReader=new FileReader();
+    const files = e.target.files;
+    Array.from(files).forEach((file) => {
+      const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
-    })
-    }
+      fileReader.onload = () => {
+        if (type == "single") {
+          setFormData((prev) => ({ ...prev, productImage: fileReader.result }));
+          setImg(fileReader.result);
+        } else {
+          setFormData((prev) => ({
+            ...prev,
+            galleryImages: [...prev.galleryImages, fileReader.result],
+          }));
+        }
+      };
+    });
   };
-  
- 
+
+  // fileReader.onload = () => {
+  //   console.log(fileReader.result);
+  //   setImg(fileReader.result);
+  // };
+  // fileReader.onerror = (error) => {
+  //   console.log(error);
+
+  // };
+
+  const base64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => resolve(fileReader.result);
+      fileReader.onerror = (error) => reject(error);
+    });
+  };
+
   return (
     <AddProductContainer>
       <Nav />
@@ -98,7 +115,7 @@ const AddProduct = () => {
         <AddProductArea
           placeholder="Product Description"
           onChange={(e) =>
-            setFormData({...formData, productDescription: e.target.value })
+            setFormData({ ...formData, productDescription: e.target.value })
           }
         ></AddProductArea>
         <AddProductArea
@@ -130,16 +147,17 @@ const AddProduct = () => {
           <SelectOption>Decoration</SelectOption>
         </SelectDropDown>
 
-        <ProductLabel>  product image</ProductLabel>
-          <ProductInput type="file" onChange={(e) => images(e)} />
-          <AddProductImage src={img}/>
-        
+        <ProductLabel> product image</ProductLabel>
+        <ProductInput type="file" onChange={(e) => images(e, "single")} />
+        <AddProductImage src={img} />
+
         <ProductLabel>gallery image</ProductLabel>
-          <ProductInput type="file" multiple onChange={(e) =>console.log(Array.from(e.target.files[0]))} />
-       
-        <ButtonButton
-        type="button"
-         onClick={() => console.log(formData)}>
+        <ProductInput
+          type="file"
+          multiple
+          onChange={(e) => images(e, "multiple")}/>
+
+        <ButtonButton type="button" onClick={() => console.log(formData)}>
           Submit
         </ButtonButton>
       </Container>
@@ -148,4 +166,5 @@ const AddProduct = () => {
     </AddProductContainer>
   );
 };
+
 export default AddProduct;
