@@ -2,6 +2,7 @@ import Home from "./pages/Home";
 import "./App.css";
 import LogIn from "./pages/LogIn";
 import AddProduct from "./pages/AddProduct";
+import NewsLetter from "./components/NewsLetter";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       {/* <Home/>*/}
       {/* <LogIn /> */}
       <AddProduct/>
+      {/* <NewsLetter/> */}
     </>
   )
 }

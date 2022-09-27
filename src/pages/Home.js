@@ -18,12 +18,12 @@ const Home = () => {
       <Slider />
       <Features />
       <Categories />
-      <BestSellers/>
-      <NewsLetter/>
-      <Footer/>
-      <NavProduct/> */}
+      <BestSellers/> */}
+      {/* <NewsLetter/> */}
+      {/* <Footer/> */}
+      <NavProduct/>
       {/* <LogIn/> */}
-      <AddProduct/>
+      {/* <AddProduct/> */}
       
     </div>
   );

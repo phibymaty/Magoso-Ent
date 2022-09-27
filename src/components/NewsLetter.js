@@ -1,3 +1,5 @@
+import Nav from "../components/Nav";
+import Footer from "../pages/Footer";
 import styled from "styled-components";
 import NewslatterItem from "./NewsLeterItem";
 

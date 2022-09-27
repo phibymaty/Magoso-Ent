@@ -1,7 +1,11 @@
 import Nav from "../components/Nav";
 import Footer from "./Footer";
 import styled from "styled-components";
-import { Label, SettingsRemote } from "@mui/icons-material";
+import {
+  Label,
+  PermDataSettingTwoTone,
+  SettingsRemote,
+} from "@mui/icons-material";
 import { useState } from "react";
 const ProductInput = styled.input`
   text-align: center;
@@ -45,17 +49,24 @@ const SelectOption = styled.option``;
 const SelectDropDown = styled.select`
   padding: 1em;
 `;
-const AddProductImage = styled.img``;
+const AddProductImage = styled.img`
+  width: 50%;
+`;
 
 const AddProduct = () => {
   const [formData, setFormData] = useState({
     productName: "",
     productDescription: "",
-    ProductDetailedDescription: "",
-    ProductPrice: 0,
+    productDetailedDescription: "",
+    productPrice: 0,
+    productSalePrice: "",
+    onOffer: "Not on offer",
+    productCategory: "",
     productImage: "",
     galleryImages: [],
   });
+  const [galleryPreview, setGalleryPrewiew] = useState([]);
+
   const [img, setImg] = useState(" ");
 
   const images = (e, type) => {
@@ -76,6 +87,7 @@ const AddProduct = () => {
             ...prev,
             galleryImages: [...prev.galleryImages, fileReader.result],
           }));
+          setGalleryPrewiew((prev) => [...prev, fileReader.result]);
         }
       };
     });
@@ -89,15 +101,6 @@ const AddProduct = () => {
   //   console.log(error);
 
   // };
-
-  const base64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => resolve(fileReader.result);
-      fileReader.onerror = (error) => reject(error);
-    });
-  };
 
   return (
     <AddProductContainer>
@@ -131,11 +134,30 @@ const AddProduct = () => {
           type="text"
           placeholder="Product Price"
           onChange={(e) =>
-            setFormData({ ...formData, productPrice: e.target.value })
+            setFormData({ ...formData, productPrice: parseInt(e.target.value) })
           }
         ></ProductInput>
+        <ProductInput
+          type="text"
+          placeholder="Product sale Price"
+          onChange={(e) =>
+            setFormData({ ...formData, productSale: parseInt(e.target.value) })
+          }
+        ></ProductInput>
+        <SelectDropDown
+          onChange={(e) =>
+            setFormData({ ...formData, productSale: e.target.value })
+          }
+        >
+          <SelectOption>On offer</SelectOption>
+          <SelectOption selected>Not on offer</SelectOption>
+        </SelectDropDown>
 
-        <SelectDropDown>
+        <SelectDropDown
+          onChange={(e) =>
+            setFormData({ ...formData, productCategory: e.target.value })
+          }
+        >
           <SelectOption selected disabled>
             Select product category
           </SelectOption>
@@ -155,7 +177,12 @@ const AddProduct = () => {
         <ProductInput
           type="file"
           multiple
-          onChange={(e) => images(e, "multiple")}/>
+          onChange={(e) => images(e, "multiples")}
+        />
+        <div style={{ display: "flex", gap: "2em" }}></div>
+        {galleryPreview.map((item) => {
+          return <AddProductImage src={item} />;
+        })}
 
         <ButtonButton type="button" onClick={() => console.log(formData)}>
           Submit
